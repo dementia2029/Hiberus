@@ -1,7 +1,8 @@
-package com.test.hiberus
+package com.test.hiberus.features.main
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.test.hiberus.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
