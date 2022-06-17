@@ -3,6 +3,7 @@ plugins {
     id 'org.jetbrains.kotlin.android'
     id("kotlin-kapt")
     id("dagger.hilt.android.plugin")
+    id("androidx.navigation.safeargs.kotlin")
 }
 
 android {
@@ -14,7 +15,7 @@ android {
         targetSdk 31
         versionCode 1
         versionName "1.0"
-
+        multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -33,6 +34,7 @@ android {
     }
     buildFeatures {
         dataBinding true
+        viewBinding true
     }
 }
 
@@ -42,6 +44,10 @@ dependencies {
     def nav_version = "2.4.2"
     def dagger_version = "2.42"
     def retrofit_version = "2.9.0"
+    def glideVersion = "4.13.2"
+    def multidex_version = "2.0.1"
+    def activity_version = "1.4.0"
+    def roomVersion = "2.4.2"
 
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.2")
 
@@ -51,20 +57,39 @@ dependencies {
     implementation("androidx.core:core-ktx:1.8.0")
     implementation("androidx.appcompat:appcompat:1.4.2")
     implementation("androidx.fragment:fragment-ktx:1.4.1")
+    implementation "androidx.activity:activity-ktx:$activity_version"
 
+    /* Lifecycle */
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:$lifecycle_version")
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version")
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-savedstate:$lifecycle_version")
 
+    /* Navigation */
     implementation("androidx.navigation:navigation-ui-ktx:$nav_version")
     implementation("androidx.navigation:navigation-fragment-ktx:$nav_version")
 
+    /* Hilt */
     implementation("com.google.dagger:hilt-android:$dagger_version")
     kapt("com.google.dagger:hilt-android-compiler:$dagger_version")
+    kapt ("com.google.dagger:hilt-compiler:$dagger_version")
 
     /* Retrofit2 */
     implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
     implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
+
+    /* Glide */
+    implementation "com.github.bumptech.glide:glide:$glideVersion"
+    implementation "com.github.bumptech.glide:annotations:$glideVersion"
+    implementation "com.github.bumptech.glide:okhttp3-integration:$glideVersion"
+    kapt "com.github.bumptech.glide:compiler:$glideVersion"
+
+    /* Room */
+    implementation("androidx.room:room-runtime:$roomVersion")
+    kapt("androidx.room:room-compiler:$roomVersion")
+    implementation("androidx.room:room-ktx:$roomVersion")
+
+    implementation "androidx.multidex:multidex:$multidex_version"
 }
 
 // Allow references to generated code
